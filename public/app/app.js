@@ -1,26 +1,17 @@
-angular.module('app', []);
+angular.module('app', ['ngResource']);
 
 (function(){
 
   'use strict';
 
   angular.module('app')
-    .controller('TestCtrl', [ '$scope', TestCtrl ]);
+    .controller('TestCtrl', [ '$scope', '$resource', TestCtrl ]);
 
-  function TestCtrl($scope) {
+  function TestCtrl($scope, $resource) {
 
     var vm = this;
 
-    $scope.jobs = [
-      {
-        title: 'Sales Person',
-        description: 'you will fight dragons'
-      },
-      {
-        title: 'Accountant',
-        description: 'you will use the keyboard'
-      }
-    ];
+    $scope.jobs = $resource('/api/jobs').query();
 
   }
 
